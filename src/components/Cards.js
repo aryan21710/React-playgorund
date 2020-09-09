@@ -1,21 +1,37 @@
 import React, { useState, useEffect } from "react";
 
-export const Cards = ({ cardCordinates }) => {
-  const { top, left } = cardCordinates;
+export const Cards = ({ cardCordinates, index, whichCardSelected }) => {
+  const { top, left, movedUp } = cardCordinates;
   const [rotateCard, setRotateCard] = useState(false);
-  const [topCord, setTopCord] = useState(0);
+  const [topCord, setTopCord] = useState(-1);
+
+  useEffect(() => {
+    if (!movedUp) {
+      setTopCord(-1);
+    }
+  }, [cardCordinates]);
+
+  useEffect(() => {
+    if (topCord !== -1 && !movedUp) {
+      setRotateCard(true);
+      whichCardSelected(index, topCord);
+      setTimeout(() => {
+        setRotateCard(false);
+      }, 2000);
+    }
+  }, [topCord]);
 
   const slideCard = (top) => {
-    const newTopCord = Number(top.replace("vh", "")) - 12 + "vh";
-    setTopCord(newTopCord);
-    setRotateCard(true);
+    const newTopCord = Number(top.replace("vh", "")) - 14 + "vh";
+    !movedUp && setTopCord(newTopCord);
   };
+
   return (
     <React.Fragment>
       <div
         onClick={() => slideCard(top)}
         style={
-          rotateCard
+          rotateCard && movedUp
             ? {
                 ...styles.cardWrapper,
                 top: topCord,
