@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Cards } from "../src/components/Cards";
 
 function App() {
-  const noOfCards = Array.from({ length: 10 }, (val, idx) => idx);
+  const noOfCards = Array.from({ length: 200 }, (val, idx) => idx);
   const [cardCordinates, setCardCordinates] = useState([]);
   const [topCord, setTopCord] = useState("");
   const [indexOfSelectedCard, setIndexOfSelectedCard] = useState(-1);
@@ -38,13 +38,13 @@ function App() {
       if (j === indexOfSelectedCard) {
         cordinates.push({
           top: topCord,
-          left: 10-i+"vw",
+          left: (30/noOfCards.length)*j+"vw",
           movedUp: true,
         });
       } else {
         cordinates.push({
-          top: 60 - i * 5 + "vh",
-          left: 10-i+"vw",
+          top: (60/noOfCards.length)*j + "vh",
+          left: (30/noOfCards.length)*j+"vw",
           movedUp: false,
         });
       }
@@ -65,10 +65,10 @@ const styles = {
   mainWrapper: {
     position: "relative",
     background: "grey",
-    top: "5vh",
+    top: "10vh",
     left: "0vw",
     width: "80vw",
-    height: "80vh",
+    height: "85vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
