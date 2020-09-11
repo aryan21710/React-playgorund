@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Cards } from "../src/components/Cards";
 
 function App() {
-  const noOfCards = Array.from({ length: 200 }, (val, idx) => idx);
+  const noOfCards = Array.from({ length: 10 }, (val, idx) => idx);
   const [cardCordinates, setCardCordinates] = useState([]);
   const [topCord, setTopCord] = useState("");
   const [indexOfSelectedCard, setIndexOfSelectedCard] = useState(-1);
@@ -34,25 +34,31 @@ function App() {
 
   const createCardCordinates = () => {
     let cordinates = [];
-    for (let i = noOfCards.length - 1,j=0; i >= 0; i--,j++) {
-      if (j === indexOfSelectedCard) {
-        cordinates.push({
-          top: topCord,
-          left: (30/noOfCards.length)*j+"vw",
-          movedUp: true,
-        });
-      } else {
-        cordinates.push({
-          top: (60/noOfCards.length)*j + "vh",
-          left: (30/noOfCards.length)*j+"vw",
-          movedUp: false,
-        });
-      }
+    let i=15;
+    let j=0;
+  while (i <= 60) {
+    if (j === indexOfSelectedCard) {
+      cordinates.push({
+        top: topCord,
+        left: (30/noOfCards.length)*j+"vw",
+        movedUp: true,
+      });
+    } else {
+      cordinates.push({
+        top: i + "vh",
+        left: (30/noOfCards.length)*j+"vw",
+        movedUp: false,
+      });
     }
+    i=i+((60-15)/noOfCards.length);
+    j=j+1
+  }
+    
     setCardCordinates(cordinates);
   };
 
 
+ 
 
   return (
     <div style={styles.mainWrapper}>
@@ -73,7 +79,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     overflow: "scroll",
-    padding: "1vh 0vw",
+    padding: "0vh 0vw",
   },
   browsebtn: {
     width: "5vw",
