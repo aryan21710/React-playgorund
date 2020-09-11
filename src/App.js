@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Cards } from "../src/components/Cards";
 
 function App() {
-  const noOfCards = Array.from({ length: 100 }, (val, idx) => idx);
+  const noOfCards = Array.from({ length: 3 }, (val, idx) => idx);
   const [cardCordinates, setCardCordinates] = useState([]);
   const [topCord, setTopCord] = useState("");
   const [indexOfSelectedCard, setIndexOfSelectedCard] = useState(-1);
@@ -32,39 +32,45 @@ function App() {
     });
   };
 
-  const myfunc = (bottomMost, topMost) => {
+  const myfunc = (noOfCards) => {
     let cordinates = [];
     let j = 0;
+    let topMost = 15;
+    let bottomMost = 0;
+    if (noOfCards.length >= 10) {
+      bottomMost = 60;
+    } else if (noOfCards.length < 10 && noOfCards.length >= 5) {
+      bottomMost = topMost * 3;
+    } else if (noOfCards.length >= 2 && noOfCards.length < 5) {
+      bottomMost = topMost + 12;
+    } else {
+      bottomMost = topMost + 5;
+
+    }
+
     while (topMost <= bottomMost) {
       if (j === indexOfSelectedCard) {
         cordinates.push({
           top: topCord,
-          left: (bottomMost / 2 / noOfCards.length) * j + "vw",
+          left: "5vw",
           movedUp: true,
         });
       } else {
         cordinates.push({
           top: topMost + "vh",
-          left: (bottomMost / 2 / noOfCards.length) * j + "vw",
+          left: "5vw",
           movedUp: false,
         });
       }
       topMost = topMost + (bottomMost - 15) / noOfCards.length;
-      j = j + 1;
+      j += 1;
     }
     return cordinates;
   };
 
   const createCardCordinates = () => {
     let cordinates = [];
-    if (noOfCards.length >= 10) {
-      cordinates = myfunc(60, 15);
-      setCardCordinates(cordinates);
-    } else if (noOfCards.length >= 10) {
-      cordinates = myfunc(30, 15);
-    } else {
-      cordinates = myfunc(25, 15);
-    }
+    cordinates = myfunc(noOfCards);
     setCardCordinates(cordinates);
   };
 

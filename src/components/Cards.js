@@ -22,7 +22,10 @@ export const Cards = ({ cardCordinates, index, whichCardSelected }) => {
   }, [topCord]);
 
   const slideCard = (top) => {
-    const newTopCord = Number(top.replace("vh", "")) - 14 + "vh";
+    const newTopCord =
+      cardCordinates.length > 5
+        ? Number(top.replace("vh", "")) - 14 + "vh"
+        : Number(top.replace("vh", "")) - 7 + "vh";
     !movedUp && setTopCord(newTopCord);
   };
 
