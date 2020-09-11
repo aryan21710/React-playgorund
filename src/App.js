@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Cards } from "../src/components/Cards";
 
 function App() {
-  const noOfCards = Array.from({ length: 10 }, (val, idx) => idx);
+  const noOfCards = Array.from({ length: 100 }, (val, idx) => idx);
   const [cardCordinates, setCardCordinates] = useState([]);
   const [topCord, setTopCord] = useState("");
   const [indexOfSelectedCard, setIndexOfSelectedCard] = useState(-1);
@@ -32,38 +32,44 @@ function App() {
     });
   };
 
+  const myfunc = (bottomMost, topMost) => {
+    let cordinates = [];
+    let j = 0;
+    while (topMost <= bottomMost) {
+      if (j === indexOfSelectedCard) {
+        cordinates.push({
+          top: topCord,
+          left: (bottomMost / 2 / noOfCards.length) * j + "vw",
+          movedUp: true,
+        });
+      } else {
+        cordinates.push({
+          top: topMost + "vh",
+          left: (bottomMost / 2 / noOfCards.length) * j + "vw",
+          movedUp: false,
+        });
+      }
+      topMost = topMost + (bottomMost - 15) / noOfCards.length;
+      j = j + 1;
+    }
+    return cordinates;
+  };
+
   const createCardCordinates = () => {
     let cordinates = [];
-    let i=15;
-    let j=0;
-  while (i <= 60) {
-    if (j === indexOfSelectedCard) {
-      cordinates.push({
-        top: topCord,
-        left: (30/noOfCards.length)*j+"vw",
-        movedUp: true,
-      });
+    if (noOfCards.length >= 10) {
+      cordinates = myfunc(60, 15);
+      setCardCordinates(cordinates);
+    } else if (noOfCards.length >= 10) {
+      cordinates = myfunc(30, 15);
     } else {
-      cordinates.push({
-        top: i + "vh",
-        left: (30/noOfCards.length)*j+"vw",
-        movedUp: false,
-      });
+      cordinates = myfunc(25, 15);
     }
-    i=i+((60-15)/noOfCards.length);
-    j=j+1
-  }
-    
     setCardCordinates(cordinates);
   };
 
-
- 
-
   return (
-    <div style={styles.mainWrapper}>
-      {iterateOverToCreateMultipleCards()}
-    </div>
+    <div style={styles.mainWrapper}>{iterateOverToCreateMultipleCards()}</div>
   );
 }
 
