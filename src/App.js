@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Cards } from "../src/components/Cards";
 
 function App() {
-  const noOfCards = Array.from({ length: 3 }, (val, idx) => idx);
+  const noOfCards = Array.from({ length: 2 }, (val, idx) => idx);
   const [cardCordinates, setCardCordinates] = useState([]);
   const [topCord, setTopCord] = useState("");
   const [indexOfSelectedCard, setIndexOfSelectedCard] = useState(-1);
