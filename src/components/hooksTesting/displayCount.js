@@ -1,6 +1,8 @@
 import React from "react";
 
 export const DisplayCount = ({ count }) => {
+    console.count(`DisplayCount`)
+
   return (
     <div style={styles.mainWrapper}>
       <h1 style={styles.display}>THE CURRENT VALUE IS {count}</h1>

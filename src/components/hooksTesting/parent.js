@@ -3,7 +3,7 @@ import { ChangeCount } from "./incrDecrCount";
 import {DisplayCount} from './displayCount'
 
 export const Parent = () => {
-    console.log(`rendered`)
+    console.count(`Parent`)
   const [count, setCount] = useState(0);
 
   const showCurrentValue = (value) => setCount(value);
