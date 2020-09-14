@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { ChangeCount } from "./incrDecrCount";
-import {DisplayCount} from './displayCount'
+import { ChangeCount } from "./ChangeCount";
+import {DisplayCount} from './DisplayCount'
+import {DisplayTitle} from './DisplayTitle'
+
 
 export const Parent = () => {
-    console.count(`Parent`)
+    console.count(`render Parent`)
   const [count, setCount] = useState(0);
 
   const showCurrentValue = (value) => setCount(value);
   return (
     <div style={styles.mainWrapper}>
+      <DisplayTitle/>
     <DisplayCount count={count}></DisplayCount>
       <ChangeCount showCurrentValue={showCurrentValue}></ChangeCount>
     </div>

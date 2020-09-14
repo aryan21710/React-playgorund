@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 export const ChangeCount = ({ showCurrentValue }) => {
-  console.count(`ChangeCount`);
+  console.count(`render ChangeCount`);
 
   const [value, setValue] = useState(0);
   const incr = () => setValue(value + 1);
