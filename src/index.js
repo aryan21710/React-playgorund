@@ -70,6 +70,31 @@ const Parent = () => {
   );
 };
 
+Parent.whyDidYouRender = {
+  logOnDifferentValues: true,
+  customName: "Parent",
+  onlyLogs: true,
+  titleColor: "green",
+  diffNameColor: "aqua",
+};
+
+ChangeCount.whyDidYouRender = {
+  logOnDifferentValues: true,
+  customName: "ChangeCount",
+  onlyLogs: true,
+  titleColor: "green",
+  diffNameColor: "aqua",
+};
+
+DisplayCount.whyDidYouRender = {
+  logOnDifferentValues: true,
+  customName: "DisplayCount",
+  onlyLogs: true,
+  titleColor: "green",
+  diffNameColor: "aqua",
+};
+
+
 const styles = {
   buttonCompWrapper: {
     width: "50vw",
@@ -125,31 +150,7 @@ const styles = {
   },
 };
 
-// Parent.whyDidYouRender=true;
 
-Parent.whyDidYouRender = {
-  logOnDifferentValues: true,
-  customName: "Parent",
-  onlyLogs: true,
-  titleColor: "green",
-  diffNameColor: "aqua",
-};
-
-ChangeCount.whyDidYouRender = {
-  logOnDifferentValues: true,
-  customName: "ChangeCount",
-  onlyLogs: true,
-  titleColor: "green",
-  diffNameColor: "aqua",
-};
-
-DisplayCount.whyDidYouRender = {
-  logOnDifferentValues: true,
-  customName: "DisplayCount",
-  onlyLogs: true,
-  titleColor: "green",
-  diffNameColor: "aqua",
-};
 
 ReactDOM.render(
   <React.StrictMode>
