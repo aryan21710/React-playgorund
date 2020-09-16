@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ChangeCount } from "./ChangeCount";
 import {DisplayCount} from './DisplayCount'
-import {DisplayTitle} from './DisplayTitle'
+import {DisplayTitle} from './DisplayTitle';
+import ErrorBoundary from './ErrorBoundary'
 
 
 export const Parent = () => {
@@ -11,9 +12,12 @@ export const Parent = () => {
   const showCurrentValue = (value) => setCount(value);
   return (
     <div style={styles.mainWrapper}>
-      <DisplayTitle/>
+    <ErrorBoundary>
+    <DisplayTitle/>
     <DisplayCount count={count}></DisplayCount>
       <ChangeCount showCurrentValue={showCurrentValue}></ChangeCount>
+    </ErrorBoundary>
+     
     </div>
   );
 };
@@ -34,3 +38,8 @@ const styles = {
     fontSize: "2vw",
   },
 };
+
+// Parent.whyDidYouRender={
+//   logOnDifferentValues: true,
+//   customName: 'Parent'
+// }

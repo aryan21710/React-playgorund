@@ -6,9 +6,14 @@ export const ChangeCount = ({ showCurrentValue }) => {
   const [value, setValue] = useState(0);
   const incr = () => setValue(value + 1);
   const decr = () => setValue(value - 1);
+
+ 
   useEffect(() => {
-    value >= 0 && showCurrentValue(value);
-  }, [value]);
+    const myfunc=()=> {
+      value >= 0 && showCurrentValue(value);
+    }
+    myfunc();
+  }, [value,showCurrentValue])
   return (
     <div style={styles.buttonCompWrapper}>
       <button style={styles.mybtn} onClick={incr}>
@@ -19,8 +24,16 @@ export const ChangeCount = ({ showCurrentValue }) => {
       </button>
     </div>
   );
-};
+}
 
+// const checkPropsValue=(prevProps,nextProps)=>{
+//   if (prevProps.showCurrentValue === nextProps.showCurrentValue) {
+//     return true
+//   }
+  
+// }
+
+// export const ChangeCount=React.memo(MemoizedValue,checkPropsValue)
 const styles = {
   buttonCompWrapper: {
     width: "50vw",
@@ -33,3 +46,16 @@ const styles = {
     background: "pink",
   },
 };
+
+
+// ChangeCount.whyDidYouRender(React, {
+//   onlyLogs: true,
+//   titleColor: "green",
+//   diffNameColor: "aqua",
+//   logOnDifferentValues: true,
+//   customName: 'ChangeCount'
+// });
+
+
+ChangeCount.whyDidYouRender=true;
+ 

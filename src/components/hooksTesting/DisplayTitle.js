@@ -2,7 +2,6 @@ import React from 'react'
 
 export const DisplayTitle = () => {
   console.count(`render DisplayTitle`);
-
     return (
         <div style={styles.mainWrapper}>
         <h1 style={styles.display}>HOOKS TESTING APP</h1>
@@ -23,6 +22,6 @@ const styles = {
     display: {
       color: "white",
       fontSize: "2vw",
-    },
+  },
   };
   
