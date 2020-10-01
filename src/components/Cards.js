@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export const Cards = ({ cardCordinates, index, whichCardSelected }) => {
+export const Cards = ({ cardCordinates, index, whichCardSelected, caseno }) => {
   const { top, left, movedUp } = cardCordinates;
   const [rotateCard, setRotateCard] = useState(false);
   const [topCord, setTopCord] = useState(-1);
@@ -43,7 +43,7 @@ export const Cards = ({ cardCordinates, index, whichCardSelected }) => {
             : { ...styles.cardWrapper, top: top, left: left }
         }
       >
-        <span className="caseno flexStyling">MC2830-2017</span>
+        <span className="caseno flexStyling">{caseno}</span>
         <span className="pet flexStyling">PETITIONER</span>
         <span className="resp flexStyling">RESPONDENT</span>
         <span className="divider"></span>

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Cards } from "../src/components/Cards";
 
 function App() {
-  const noOfCards = Array.from({ length: 2 }, (val, idx) => idx);
+  const caseNo=["MC2830","MC2831","MC2830","MC2831"]
+  const noOfCards = caseNo;
   const [cardCordinates, setCardCordinates] = useState([]);
   const [topCord, setTopCord] = useState("");
   const [indexOfSelectedCard, setIndexOfSelectedCard] = useState(-1);
@@ -27,6 +28,7 @@ function App() {
           cardCordinates={_}
           index={idx}
           whichCardSelected={whichCardSelected}
+          caseno={_.caseno}
         />
       );
     });
@@ -48,18 +50,20 @@ function App() {
 
     }
 
-    while (topMost <= bottomMost) {
+    while (topMost < bottomMost) {
       if (j === indexOfSelectedCard) {
         cordinates.push({
           top: topCord,
           left: "5vw",
           movedUp: true,
+          caseno: caseNo[j]
         });
       } else {
         cordinates.push({
           top: topMost + "vh",
           left: "5vw",
           movedUp: false,
+          caseno: caseNo[j]
         });
       }
       topMost = topMost + (bottomMost - 15) / noOfCards.length;

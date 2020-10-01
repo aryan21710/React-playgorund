@@ -9,6 +9,7 @@
     "@welldone-software/why-did-you-render": "^4.3.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-placeholder": "^4.0.3",
     "react-scripts": "3.4.3",
     "react-stack-cards": "^1.0.8"
   },
