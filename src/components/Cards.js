@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-export const Cards = ({ cardCordinates, index, whichCardSelected, caseno }) => {
+export const Cards = ({ cardCordinates, index, whichCardSelected, caseno,disableFirstTimeLoadAnim,isFirstTimeLoadAnim }) => {
   const { top, left, movedUp } = cardCordinates;
   const [rotateCard, setRotateCard] = useState(false);
   const [topCord, setTopCord] = useState(-1);
+  const [initialStyle,setInitialStyle]=useState({
+    ...styles.cardWrapper, top: "-20vh", left: left
+  })
 
   useEffect(() => {
     if (!movedUp) {
@@ -12,14 +15,24 @@ export const Cards = ({ cardCordinates, index, whichCardSelected, caseno }) => {
   }, [cardCordinates]);
 
   useEffect(() => {
+
     if (topCord !== -1 && !movedUp) {
       setRotateCard(true);
+      setInitialStyle({ ...styles.cardWrapper,
+        top: topCord,
+        left: left})
       whichCardSelected(index, topCord);
       setTimeout(() => {
         setRotateCard(false);
       }, 2000);
     }
   }, [topCord]);
+
+
+  useEffect(()=>{
+    setInitialStyle({...initialStyle, top: `${top}`, transition: "top 1s linear 0.2s"})
+    disableFirstTimeLoadAnim(false);
+  },[])
 
   const slideCard = (top) => {
     const newTopCord =
@@ -28,6 +41,7 @@ export const Cards = ({ cardCordinates, index, whichCardSelected, caseno }) => {
         : Number(top.replace("vh", "")) - 7 + "vh";
     !movedUp && setTopCord(newTopCord);
   };
+
 
   return (
     <React.Fragment>
@@ -40,7 +54,7 @@ export const Cards = ({ cardCordinates, index, whichCardSelected, caseno }) => {
                 top: topCord,
                 left: left,
               }
-            : { ...styles.cardWrapper, top: top, left: left }
+            : initialStyle
         }
       >
         <span className="caseno flexStyling">{caseno}</span>
@@ -64,17 +78,7 @@ const styles = {
     gridTemplateColumns: "10vw 10vw",
     gridTemplateRows: "8vh 6vh 6vh",
     position: "absolute",
-    top: "10vh",
-    left: "10vw",
     cursor: "pointer",
-    transition: "top 0.2s linear",
-  },
-  cardPlacement: {
-    position: "absolute",
-    top: "10vh",
-    left: "10vw",
-  },
-  moveCard: {
-    top: "4vh",
+    transition: "all 0.2s linear"
   },
 };

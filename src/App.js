@@ -2,10 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Cards } from "../src/components/Cards";
 
 function App() {
-  const caseNo=["MC2830","MC2831","MC2830","MC2831"]
+  const caseNo = [
+    "MC2830",
+    "MC2831",
+    
+  ];
+
   const noOfCards = caseNo;
   const [cardCordinates, setCardCordinates] = useState([]);
   const [topCord, setTopCord] = useState("");
+  const [isFirstTimeLoadAnim, setIsFirstTimeLoadAnim]=useState(true)
   const [indexOfSelectedCard, setIndexOfSelectedCard] = useState(-1);
 
   useEffect(() => {
@@ -21,6 +27,8 @@ function App() {
     setTopCord(newTopCord);
   };
 
+  const disableFirstTimeLoadAnim=(value)=>setIsFirstTimeLoadAnim(value)
+
   const iterateOverToCreateMultipleCards = () => {
     return cardCordinates.map((_, idx) => {
       return (
@@ -29,6 +37,8 @@ function App() {
           index={idx}
           whichCardSelected={whichCardSelected}
           caseno={_.caseno}
+          disableFirstTimeLoadAnim={disableFirstTimeLoadAnim}
+          isFirstTimeLoadAnim={isFirstTimeLoadAnim}
         />
       );
     });
@@ -47,7 +57,6 @@ function App() {
       bottomMost = topMost + 12;
     } else {
       bottomMost = topMost + 5;
-
     }
 
     while (topMost < bottomMost) {
@@ -56,14 +65,14 @@ function App() {
           top: topCord,
           left: "5vw",
           movedUp: true,
-          caseno: caseNo[j]
+          caseno: caseNo[j],
         });
       } else {
         cordinates.push({
-          top: topMost + "vh",
+          top: 20+(j*2)+"vh",
           left: "5vw",
           movedUp: false,
-          caseno: caseNo[j]
+          caseno: caseNo[j],
         });
       }
       topMost = topMost + (bottomMost - 15) / noOfCards.length;
@@ -96,12 +105,6 @@ const styles = {
     alignItems: "center",
     overflow: "scroll",
     padding: "0vh 0vw",
-  },
-  browsebtn: {
-    width: "5vw",
-    height: "3vh",
-    background: "black",
-    color: "white",
   },
 };
 
