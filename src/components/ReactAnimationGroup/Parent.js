@@ -5,7 +5,7 @@ import justice from '../../images/justice.jpg';
 import fbIcon from '../../images/fbIcon.png';
 
 export const Parent = () => {
-	const [imgArray, setImgArray] = useState([sfo, apple, justice, fbIcon]);
+    const imgArray=[].concat(sfo, apple, justice, fbIcon);
 	const [imgArrayIdx, setImgArrayIdx] = useState(0);
 	const nextImage = () => imgArrayIdx < imgArray.length - 1 && setImgArrayIdx(imgArrayIdx + 1);
 	const prevImage = () => imgArrayIdx > 0 && setImgArrayIdx(imgArrayIdx - 1);
