@@ -3,18 +3,21 @@ import sfo from '../../images/sfo.jpg';
 import apple from '../../images/apple_raw.png';
 import justice from '../../images/justice.jpg';
 import fbIcon from '../../images/fbIcon.png';
+import { CSSTransition } from 'react-transition-group';
 
 export const Parent = () => {
-    const imgArray=[].concat(sfo, apple, justice, fbIcon);
+	const imgArray = [].concat(sfo, apple, justice, fbIcon);
 	const [imgArrayIdx, setImgArrayIdx] = useState(0);
 	const nextImage = () => imgArrayIdx < imgArray.length - 1 && setImgArrayIdx(imgArrayIdx + 1);
 	const prevImage = () => imgArrayIdx > 0 && setImgArrayIdx(imgArrayIdx - 1);
-
+	const [isVisible, setIsVisible] = useState(true);
 	return (
 		<main style={{ ...styles.wrapper, ...styles.flexStyling, flexDirection: 'column' }}>
-			<section style={{ ...styles.cardWrapper }}>
-				<img style={styles.imageWrapper} src={imgArray[imgArrayIdx]} />
-			</section>
+			<CSSTransition in={isVisible} appear={true} timeout={2000} classNames="fadeImages">
+				<section style={{ ...styles.cardWrapper }}>
+					<img style={styles.imageWrapper} src={imgArray[imgArrayIdx]} />
+				</section>
+			</CSSTransition>
 			<section style={{ ...styles.btnWrapper, ...styles.flexStyling, flexDirection: 'row' }}>
 				<button style={styles.btn} onClick={prevImage}>
 					PREV
