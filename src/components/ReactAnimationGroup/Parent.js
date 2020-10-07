@@ -3,31 +3,39 @@ import sfo from '../../images/sfo.jpg';
 import apple from '../../images/apple_raw.png';
 import justice from '../../images/justice.jpg';
 import fbIcon from '../../images/fbIcon.png';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import uuid from 'react-uuid';
 
 export const Parent = () => {
 	const imgArray = [].concat(sfo, apple, justice, fbIcon);
 	const [imgArrayIdx, setImgArrayIdx] = useState(0);
 	const nextImage = () => imgArrayIdx < imgArray.length - 1 && setImgArrayIdx(imgArrayIdx + 1);
 	const prevImage = () => imgArrayIdx > 0 && setImgArrayIdx(imgArrayIdx - 1);
-	const [isVisible, setIsVisible] = useState(true);
 	return (
-		<main style={{ ...styles.wrapper, ...styles.flexStyling, flexDirection: 'column' }}>
-			<CSSTransition in={isVisible} appear={true} timeout={2000} classNames="fadeImages">
-				<section style={{ ...styles.cardWrapper }}>
-					<img style={styles.imageWrapper} src={imgArray[imgArrayIdx]} />
-				</section>
-			</CSSTransition>
-			<section style={{ ...styles.btnWrapper, ...styles.flexStyling, flexDirection: 'row' }}>
-				<button style={styles.btn} onClick={prevImage}>
-					PREV
-				</button>
+		<CSSTransition in={true} appear={true} timeout={2000} classNames="fadeImages">
+			<main style={{ ...styles.wrapper, ...styles.flexStyling, flexDirection: 'column' }}>
+				<SwitchTransition>
+					<CSSTransition
+						key={imgArrayIdx}
+						appear={true}
+						timeout={200}
+						addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
+						classNames="slideImages"
+					>
+						<img style={styles.imageWrapper} src={imgArray[imgArrayIdx]} />
+					</CSSTransition>
+				</SwitchTransition>
+				<section style={{ ...styles.btnWrapper, ...styles.flexStyling, flexDirection: 'row' }}>
+					<button style={styles.btn} onClick={prevImage}>
+						PREV
+					</button>
 
-				<button style={styles.btn} onClick={nextImage}>
-					NEXT
-				</button>
-			</section>
-		</main>
+					<button style={styles.btn} onClick={nextImage}>
+						NEXT
+					</button>
+				</section>
+			</main>
+		</CSSTransition>
 	);
 };
 
@@ -46,18 +54,18 @@ const styles = {
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	btnWrapper: {
-		width: '10vw',
-		height: '2vh',
-		marginTop: '1vh',
-	},
+
 	cardWrapper: {
 		border: '1px solid black',
 	},
 	imageWrapper: {
 		width: '300px',
 		height: '300px',
-		objectFit: 'fill',
+	},
+	btnWrapper: {
+		width: '10vw',
+		height: '2vh',
+		marginTop: '1vh',
 	},
 	btn: {
 		background: 'black',

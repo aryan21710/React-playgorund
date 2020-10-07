@@ -80,6 +80,34 @@ code {
 .fadeImages-appear.fadeImages-appear-active {
 	opacity: 1;
 	transform: scale(1);
-	transition: opacity 1000ms ease-in-out, transform 1000ms ease-in-out;
+	transition: opacity 2000ms ease-in-out, transform 2000ms ease-in-out;
 }
+
+.slideImages-enter {
+  opacity: 0;
+  transform: scale(0.8);
+
+}
+
+.slideImages-enter-active {
+  opacity: 1;
+  transform: scale(1);
+	transition: opacity 200ms linear,transform 200ms ease-in-out;
+}
+
+
+.slideImages-exit {
+	opacity: 1;
+}
+
+.slideImages-exit-active {
+  opacity: 0;
+  transform: scale(1);
+	transition: opacity 200ms linear,transform 200ms ease-in-out;
+}
+
+
+
+
+
 

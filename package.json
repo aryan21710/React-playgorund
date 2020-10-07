@@ -12,7 +12,8 @@
     "react-placeholder": "^4.0.3",
     "react-scripts": "3.4.3",
     "react-stack-cards": "^1.0.8",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^4.4.1",
+    "react-uuid": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
