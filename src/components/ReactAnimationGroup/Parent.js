@@ -4,7 +4,6 @@ import apple from '../../images/apple_raw.png';
 import justice from '../../images/justice.jpg';
 import fbIcon from '../../images/fbIcon.png';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
-import uuid from 'react-uuid';
 
 export const Parent = () => {
 	const imgArray = [].concat(sfo, apple, justice, fbIcon);
