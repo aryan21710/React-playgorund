@@ -5,7 +5,7 @@ import { animated, useSpring } from 'react-spring';
 export const AnimatedSlider = () => {
 	const [isClicked, setIsClicked] = useState(false);
 	const props = useSpring({
-		width: isClicked ? 100 : 0,
+		width: isClicked ? 300 : 0,
 		backgroundColor: isClicked ? 'red' : 'grey',
 		config: {
 			duration: 2000,
@@ -25,7 +25,7 @@ export const AnimatedSlider = () => {
 		left: 0vw;
 	`;
 	const SliderWrapper = styled(animated.div)`
-		width: 98px;
+		width: 298px;
 		height: 30px;
 		border: 2px solid white;
 		display: flex;
@@ -34,7 +34,7 @@ export const AnimatedSlider = () => {
 		color: white;
 		position: absolute;
 		top: 20vh;
-		left: 10vw;
+		left: 7vw;
 		z-index: 1;
 	`;
 
@@ -42,13 +42,13 @@ export const AnimatedSlider = () => {
 		height: 34px;
 		position: absolute;
 		top: 20vh;
-		left: 10vw;
+		left: 7vw;
 		z-index: 0;
 	`;
 	return (
 		<MainWrapper>
 			<SliderWrapper onClick={() => setIsClicked(!isClicked)}>
-				{props.width.interpolate((x) => Math.floor(x))}
+				{props.width.interpolate((x) => Math.floor(x/3))}
 			</SliderWrapper>
 			<AnimSlider style={props}></AnimSlider>
 		</MainWrapper>
