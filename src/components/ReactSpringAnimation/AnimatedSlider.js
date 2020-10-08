@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { animated, useSpring } from 'react-spring';
+import { animated, useSpring, config } from 'react-spring';
 
 export const AnimatedSlider = () => {
 	const [isClicked, setIsClicked] = useState(false);
 	const props = useSpring({
 		width: isClicked ? 300 : 0,
-		backgroundColor: isClicked ? 'red' : 'grey',
-		config: {
-			duration: 2000,
-			delay: 1000,
-		},
+        backgroundColor: isClicked ? 'red' : 'grey',
+        config:config.slow,
+		// config: {
+        //     mass: 100,
+        //     friction: 26,
+        //     tension: 170,
+        //     velocity: 1,
+        //     clamp: true,
+        //     easing: 'ease-in-out',
+		// },
 	});
 
 	const MainWrapper = styled(animated.div)`
@@ -35,7 +40,8 @@ export const AnimatedSlider = () => {
 		position: absolute;
 		top: 20vh;
 		left: 7vw;
-		z-index: 1;
+        z-index: 1;
+        overflow: hidden;
 	`;
 
 	const AnimSlider = styled(animated.div)`
