@@ -8,12 +8,12 @@ export const ThreeDCard = () => {
 	const props = useSpring({
         transform: isClicked ? 'perspective(500px) scaleZ(2.5) translateZ(40px)' : 'perspective(500px) scaleZ(1) translateZ(0px)',
         boxShadow : isClicked ? "2px 2px 10px 10px white" : "0px 0px 0px 0px white",
-		// config: config.wobbly,
-		config: {
-		    mass: 10,
-		    friction: 40,
-		    tension: 500,
-		},
+		config: config.slow,
+		// config: {
+		//     mass: 10,
+		//     friction: 40,
+		//     tension: 500,
+		// },
 	});
 
 	const MainWrapper = styled(animated.div)`
