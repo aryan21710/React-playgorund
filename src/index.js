@@ -5,5 +5,7 @@ import App from './App';
 import './index.css';
 import { Parent } from './components/ReactAnimationGroup/Parent';
 import { AnimatedSlider } from './components/ReactSpringAnimation/AnimatedSlider.js';
+import { ThreeDCard } from './components/ReactSpringAnimation/ThreeDCard';
 
-ReactDOM.render(<AnimatedSlider />, document.getElementById('root'));
+
+ReactDOM.render(<ThreeDCard />, document.getElementById('root'));

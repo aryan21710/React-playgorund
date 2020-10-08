@@ -9,11 +9,11 @@ export const AnimatedSlider = () => {
         backgroundColor: isClicked ? 'red' : 'grey',
         config:config.slow,
 		// config: {
-        //     mass: 100,
+        //     mass: 10,
         //     friction: 26,
-        //     tension: 170,
+        //     tension: 500,
         //     velocity: 1,
-        //     clamp: true,
+        //     clamp: false,
         //     easing: 'ease-in-out',
 		// },
 	});
