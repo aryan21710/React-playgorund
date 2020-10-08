@@ -10,8 +10,8 @@ export const ThreeDCard = () => {
         boxShadow : isClicked ? "2px 2px 10px 10px white" : "0px 0px 0px 0px white",
 		// config: config.wobbly,
 		config: {
-		    mass: 1,
-		    friction: 12,
+		    mass: 10,
+		    friction: 40,
 		    tension: 500,
 		},
 	});
