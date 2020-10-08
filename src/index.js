@@ -6,6 +6,8 @@ import './index.css';
 import { Parent } from './components/ReactAnimationGroup/Parent';
 import { AnimatedSlider } from './components/ReactSpringAnimation/AnimatedSlider.js';
 import { ThreeDCard } from './components/ReactSpringAnimation/ThreeDCard';
+import { FlipCard } from './components/ReactSpringAnimation/FlipCard';
 
 
-ReactDOM.render(<ThreeDCard />, document.getElementById('root'));
+
+ReactDOM.render(<FlipCard />, document.getElementById('root'));
