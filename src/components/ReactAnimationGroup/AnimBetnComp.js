@@ -26,30 +26,30 @@ export const AnimBetnComp = () => {
 	useEffect(() => {
 		if (getIndex > -1) {
 			const _ = clickCount.map((_, idx) => {
-				if (idx === parseInt(getIndex)) {
+				if (idx === count - 1) {
 					return {
 						status: true,
 						animated: true,
 						imgname: imgname,
-						index: parseInt(getIndex)
+						index: count - 1,
 					};
-				} else if (_.animated && (idx !== parseInt(getIndex))) {
-                    return  {
+				} else if (_.animated && idx !== count) {
+					return {
 						status: false,
 						animated: true,
 						imgname: _.imgname,
-						index: _.index
+						index: _.index,
 					};
-                } else {
-                    return  {
+				} else {
+					return {
 						status: false,
 						animated: false,
 						imgname: _.imgname,
-						index: _.index
+						index: _.index,
 					};
-                }
-            });
-            console.log(`updated is ${JSON.stringify(_)}`)
+				}
+			});
+			console.log(`updated is ${JSON.stringify(_)}`);
 
 			setClickCount(_);
 		}
@@ -81,8 +81,8 @@ export const AnimBetnComp = () => {
 		align-items: center;
 		display: flex;
 		position: relative;
-        overflow: hidden;
-        width: 15vw;
+		overflow: hidden;
+		width: 15vw;
 	`;
 	const InputWrapper = styled.div`
 		width: 100vw;
@@ -101,13 +101,13 @@ export const AnimBetnComp = () => {
 		height: 30vh;
 		width: 30vw;
 		position: absolute;
-        left: ${props=>props.leftPos || "-30vw"};
-        background-image: url(${(props) => props.imgname});
+		left: ${(props) => props.leftPos || '-30vw'};
+		background-image: url(${(props) => props.imgname});
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: 130px 130px;
-        border-radius: 50%;
-        border: 2px solid ${props=>props.borderColor};
+		border-radius: 50%;
+		border: 2px solid ${(props) => props.borderColor};
 		height: 130px;
 		width: 130px;
 	`;
@@ -129,12 +129,11 @@ export const AnimBetnComp = () => {
 		background-repeat: no-repeat;
 		border-radius: 50%;
 		height: 130px;
-        width: 130px;
-        border: 2px solid ${props=>props.borderColor}
+		width: 130px;
+		border: 2px solid ${(props) => props.borderColor};
 	`;
 
-	const conditionForAnimation = (idx) => parseInt(getIndex)=== idx
-	
+	const conditionForAnimation = (_) => _.index >= 0;
 
 	return (
 		<React.Fragment>
@@ -148,25 +147,25 @@ export const AnimBetnComp = () => {
 			<InputWrapper>
 				{clickCount.map((_, idx) => {
 					{
-						if (conditionForAnimation(idx)) {
+						if (conditionForAnimation(_) && _.status) {
 							return (
 								<LowerChildWrapper>
-									<AnimatedWrapper borderColor= "green" imgname={_.imgname}/>
+									<AnimatedWrapper borderColor="green" imgname={_.imgname} />
 								</LowerChildWrapper>
 							);
-						}  else if (!_.status && _.animated && !conditionForAnimation(idx)) {
+						} else if (!_.status && _.animated && conditionForAnimation(_)) {
 							return (
 								<LowerChildWrapper>
-									<UnAnimatedWrapper borderColor= "yellow" imgname={_.imgname} leftPos="5vw"/>
+									<UnAnimatedWrapper borderColor="yellow" imgname={_.imgname} leftPos="5vw" />
 								</LowerChildWrapper>
 							);
 						} else {
-                            return (
+							return (
 								<LowerChildWrapper>
-									<UnAnimatedWrapper borderColor= "red"/>
+									<UnAnimatedWrapper borderColor="red" />
 								</LowerChildWrapper>
 							);
-                        }
+						}
 					}
 				})}
 			</InputWrapper>
