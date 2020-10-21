@@ -74,15 +74,15 @@ export const AnimBetnComp = () => {
 		overflow: hidden;
 	`;
 
-	const LowerChildWrapper = styled(UpperChildWrapper)`
-		flex: 1;
+	const LowerChildWrapper = styled.div`
 		background: grey;
 		border: 2px solid white;
 		justify-content: center;
 		align-items: center;
 		display: flex;
 		position: relative;
-		overflow: hidden;
+        overflow: hidden;
+        width: 15vw;
 	`;
 	const InputWrapper = styled.div`
 		width: 100vw;
@@ -133,11 +133,8 @@ export const AnimBetnComp = () => {
         border: 2px solid ${props=>props.borderColor}
 	`;
 
-	const conditionForAnimation = () => {
-		if (getIndex > -1) {
-			return true;
-		}
-	};
+	const conditionForAnimation = (idx) => parseInt(getIndex)=== idx
+	
 
 	return (
 		<React.Fragment>
@@ -151,13 +148,13 @@ export const AnimBetnComp = () => {
 			<InputWrapper>
 				{clickCount.map((_, idx) => {
 					{
-						if (parseInt(getIndex)=== idx) {
+						if (conditionForAnimation(idx)) {
 							return (
 								<LowerChildWrapper>
 									<AnimatedWrapper borderColor= "green" imgname={_.imgname}/>
 								</LowerChildWrapper>
 							);
-						}  else if (!_.status && _.animated && parseInt(getIndex)!== idx) {
+						}  else if (!_.status && _.animated && !conditionForAnimation(idx)) {
 							return (
 								<LowerChildWrapper>
 									<UnAnimatedWrapper borderColor= "yellow" imgname={_.imgname} leftPos="5vw"/>
