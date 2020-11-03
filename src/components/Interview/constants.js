@@ -31,3 +31,9 @@ export const PRODUCTDATA = [
 		quantity: 4,
 	},
 ];
+
+
+export const UPDATEDPRODUCTDATA=PRODUCTDATA.map((data) => ({
+	...data,
+	amount: data.price * data.quantity,
+}))

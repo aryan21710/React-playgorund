@@ -44,12 +44,13 @@ export const InnerWrapper = styled.div`
 	width: ${(props) => props.width || '25vw'};
 	flex: ${(props) => props.flex || '1'};
     flex-wrap: ${props=>props.flexWrap};
-	z-index: 2;
+    z-index: 2;
 	@media (max-width: 768px) {
 		width: 100vw;
 		height: 30vh;
 	}
 `
+
 
 
 

@@ -1,59 +1,64 @@
-import React from 'react';
-import { PRODUCTDATA } from './constants';
+import React, { useState, useEffect } from 'react';
+import { UPDATEDPRODUCTDATA } from './constants';
 import { ProductView } from './ProductView';
 import { Wrapper } from '../StyledComponents/StyledComponents';
 import './styling.css';
 
 export const ProductContainer = () => {
-
-	return (
-		<Wrapper>
-			<ProductView
-				productData={PRODUCTDATA}
-			/>
-		</Wrapper>
-	);
-};
-
-
-/*
-
-
-
-export const ProductContainer = () => {
-	const [productData, setProductData] = useState(PRODUCTDATA);
-	const [totalAmount, setTotalAmount] = useState(0);
-	const [searchText, setSearchText] = useState('');
-
-	useEffect(() => {
-		updateProductData();
-	}, []);
-
-	const onSearchHandler = () => {
-		searchText.length > 0
-			? setProductData(productData.filter((data) => data.productName === searchText))
-			: setProductData([...PRODUCTDATA]);
-	};
-
-	const onChangeHandler = (e) => setSearchText(e.target.value.trim());
-
-	useEffect(() => {
-		searchText.length === 0 && setProductData([...PRODUCTDATA]);
-	}, [searchText]);
-
-	const updateProductData = (newPrice = undefined, productName = '', newQuantity = undefined) => {
+	const [productData, setProductData] = useState(UPDATEDPRODUCTDATA);
+	const [totalAmount, setTotalAmount] = useState(() => {
 		let totalAmount = 0;
-		const _ = productData.map((data) => {
-			if (data.productName === productName) {
-				const newAmount = newPrice && newQuantity ? newPrice * newAmount : undefined;
-				const price = newPrice ? newPrice : data.price;
-				const quantity = newQuantity ? newQuantity : data.quantity;
-				totalAmount += price * quantity;
+		UPDATEDPRODUCTDATA.forEach((data) => {
+			totalAmount += data.price * data.quantity;
+		});
+		return totalAmount;
+	});
+	const [search, setSearch] = useState('');
+
+    const onChangeHandler = (e) => setSearch(e.target.value.trim());
+    
+
+    const filterDataBySearchedText=()=>{
+        const regexPattern = new RegExp(search,"g");
+		search.length > 0
+			? setProductData(productData.filter((data) => data.productName.match(regexPattern)))
+			: setProductData(UPDATEDPRODUCTDATA);
+    }
+
+	useEffect(() => {
+		filterDataBySearchedText()
+	}, [search]);
+
+	const updateProductPrice = (newPrice, index) => {
+		console.log(`updateProductData ${newPrice}`);
+		let totalAmount = 0;
+		const _ = productData.map((data, idx) => {
+			if (index === idx) {
+				totalAmount += newPrice * data.quantity;
 				return {
 					...data,
-					quantity: newQuantity > 0 ? newQuantity : data.quantity,
-					price: newPrice > 0 ? newPrice : data.price,
-					amount: price * quantity,
+					price: newPrice,
+					amount: newPrice * data.quantity,
+				};
+			} else {
+				totalAmount += data.price * data.quantity;
+				return { ...data, amount: data.price * data.quantity };
+			}
+		});
+		setProductData(_);
+		setTotalAmount(totalAmount);
+	};
+
+	const updateProductQuantity = (newQuantity, index) => {
+		console.log(`updateProductData ${newQuantity}`);
+		let totalAmount = 0;
+		const _ = productData.map((data, idx) => {
+			if (index === idx) {
+				totalAmount += data.price * newQuantity;
+				return {
+					...data,
+					quantity: newQuantity,
+					amount: data.price * newQuantity,
 				};
 			} else {
 				totalAmount += data.price * data.quantity;
@@ -66,31 +71,30 @@ export const ProductContainer = () => {
 
 	const onChangePriceHandler = (e) => {
 		e.preventDefault();
-		const newPrice = parseInt(e.target.value.trim());
-		const productName = e.target.dataset.productname.trim();
-		updateProductData(newPrice, productName, undefined);
+		const newPrice = isNaN(parseInt(e.target.value.trim())) ? 0 : parseInt(e.target.value.trim());
+		const index = parseInt(e.target.dataset.index);
+		updateProductPrice(newPrice, index);
 	};
 
 	const onChangeQuantityHandler = (e) => {
 		e.preventDefault();
-		const newQuantity = parseInt(e.target.value.trim());
-		const productName = e.target.dataset.productname.trim();
-		updateProductData(undefined, productName, newQuantity);
+		const newQuantity = isNaN(parseInt(e.target.value.trim())) ? 0 : parseInt(e.target.value.trim());
+		const index = parseInt(e.target.dataset.index);
+		updateProductQuantity(newQuantity, index);
 	};
 
 	return (
 		<Wrapper>
 			<ProductView
-				productData={PRODUCTDATA}
+				productData={productData}
+				setProductData={setProductData}
 				onChangePriceHandler={onChangePriceHandler}
 				onChangeQuantityHandler={onChangeQuantityHandler}
+				totalAmount={totalAmount}
 				onChangeHandler={onChangeHandler}
-                onSearchHandler={onSearchHandler}
-                totalAmount={totalAmount}
-                searchText={searchText}
+				search={search}
 			/>
 		</Wrapper>
 	);
 };
 
-*/
