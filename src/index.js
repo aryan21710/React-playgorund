@@ -7,10 +7,13 @@ import { AnimatedSlider } from './components/ReactSpringAnimation/AnimatedSlider
 import { ThreeDCard } from './components/ReactSpringAnimation/ThreeDCard';
 import { FlipCard } from './components/ReactSpringAnimation/FlipCard';
 import { App } from './components/Interview questions/TodolistWithProps';
-import {AnimBetnComp} from './components/ReactAnimationGroup/AnimBetnComp'
+import {AnimBetnComp} from './components/ReactAnimationGroup/AnimBetnComp';
+import Container from './components/Gk_Trial/Container';
+import {ProductContainer} from './components/Interview/ProductContainer'
+
 const items = [ { text: 'Buy grocery', done: true },
   { text: 'Play guitar', done: false },
   { text: 'Romantic dinner', done: false }
 ];
-ReactDOM.render(<AnimBetnComp/>
+ReactDOM.render(<ProductContainer/>
   , document.getElementById('root'));

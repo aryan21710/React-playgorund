@@ -1,0 +1,48 @@
+
+table {
+    width: 100vw;
+    margin: 2vh 0vw;
+}
+
+
+
+table > thead > tr > th {
+	text-align: center;
+    font-size: 2vw;
+    color: white;
+    border: 1px solid white;
+}
+
+table > tbody > tr > td{
+	font-size: 1.5vw;
+	text-align: center;
+	height: 1vh;
+    width: 12vw;
+    border: 1px solid white;
+    padding: 1vh 0vw;
+}
+
+.search {
+    width: 50vw;
+    border-radius: 20px;
+    height: 3vh;
+    outline: none;
+    text-decoration: none;
+    font-size: 1.5vw;
+    color: black;
+    padding: 0.5vh 1vw;
+
+}
+
+input::placeholder {
+    font-size: 1.5vw;
+    color: grey;
+    padding: 0.5vh 1vw;
+
+}
+
+input {
+    font-size: 1.5vw;
+}
+
+

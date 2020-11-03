@@ -16,7 +16,6 @@ export const AnimBetnComp = () => {
 		Array(6)
 			.fill('')
 			.map(() => ({
-				status: false,
 				animated: false,
 				imgname: '',
 				index: -1,
@@ -24,25 +23,22 @@ export const AnimBetnComp = () => {
 	);
 
 	useEffect(() => {
-		if (getIndex > -1) {
+		if (getIndex > -1 && count <= 4) {
 			const _ = clickCount.map((_, idx) => {
 				if (idx === count - 1) {
 					return {
-						status: true,
 						animated: true,
 						imgname: imgname,
 						index: count - 1,
 					};
 				} else if (_.animated && idx !== count) {
 					return {
-						status: false,
-						animated: true,
+						animated: false,
 						imgname: _.imgname,
 						index: _.index,
 					};
 				} else {
 					return {
-						status: false,
 						animated: false,
 						imgname: _.imgname,
 						index: _.index,
@@ -52,10 +48,22 @@ export const AnimBetnComp = () => {
 			console.log(`updated is ${JSON.stringify(_)}`);
 
 			setClickCount(_);
+		} else {
+			setClickCount(
+				Array(6)
+					.fill('')
+					.map(() => ({
+						animated: false,
+						imgname: '',
+						index: -1,
+					}))
+			);
+			setGetIndex(-1);
+			setCount(0);
 		}
-	}, [getIndex]);
+    }, [getIndex]);
+    
 
-	useEffect(() => {}, []);
 
 	const animateNow = (e) => {
 		setGetIndex(e.target.dataset.index);
@@ -147,13 +155,13 @@ export const AnimBetnComp = () => {
 			<InputWrapper>
 				{clickCount.map((_, idx) => {
 					{
-						if (conditionForAnimation(_) && _.status) {
+						if (conditionForAnimation(_) && _.animated) {
 							return (
 								<LowerChildWrapper>
 									<AnimatedWrapper borderColor="green" imgname={_.imgname} />
 								</LowerChildWrapper>
 							);
-						} else if (!_.status && _.animated && conditionForAnimation(_)) {
+						} else if (!_.animated && conditionForAnimation(_)) {
 							return (
 								<LowerChildWrapper>
 									<UnAnimatedWrapper borderColor="yellow" imgname={_.imgname} leftPos="5vw" />
@@ -172,17 +180,3 @@ export const AnimBetnComp = () => {
 		</React.Fragment>
 	);
 };
-
-/*
-LowerChildWrapper>
-                    if (_.status && _.animated ) {
-                            return (<LowerChildWrapper><AnimatedWrapper imgname={imgname}/></LowerChildWrapper>)
-                    } else if (!_.status &&! _.animated) {
-                           return  (<LowerChildWrapper><UnAnimatedWrapper /></LowerChildWrapper>)
-                    } else if (!_.status && _.animated) {
-                        return (<LowerChildWrapper><UnAnimatedWrapper imgname={imgname} left="15vw"/></LowerChildWrapper>)
-                    }
-
-
-
-*/

@@ -48,18 +48,18 @@ function App() {
     let cordinates = [];
     let j = 0;
     let topMost = 15;
-    let bottomMost = 0;
+    let BiketomMost = 0;
     if (noOfCards.length >= 10) {
-      bottomMost = 60;
+      BiketomMost = 60;
     } else if (noOfCards.length < 10 && noOfCards.length >= 5) {
-      bottomMost = topMost * 3;
+      BiketomMost = topMost * 3;
     } else if (noOfCards.length >= 2 && noOfCards.length < 5) {
-      bottomMost = topMost + 12;
+      BiketomMost = topMost + 12;
     } else {
-      bottomMost = topMost + 5;
+      BiketomMost = topMost + 5;
     }
 
-    while (topMost < bottomMost) {
+    while (topMost < BiketomMost) {
       if (j === indexOfSelectedCard) {
         cordinates.push({
           top: topCord,
@@ -75,7 +75,7 @@ function App() {
           caseno: caseNo[j],
         });
       }
-      topMost = topMost + (bottomMost - 15) / noOfCards.length;
+      topMost = topMost + (BiketomMost - 15) / noOfCards.length;
       j += 1;
     }
     return cordinates;
