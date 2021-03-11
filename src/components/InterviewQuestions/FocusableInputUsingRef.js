@@ -26,13 +26,13 @@ class Input extends React.PureComponent {
     // If focused prop is true, the input should receive the focus.
     // Implement your solution below:
     componentDidUpdate(prevProps) {
-      if (prevProps.focused !== this.props.focused && this.props.focused) {
+      if (prevProps.focused !== this.props.focused && !this.props.focused) {
               this.ref.current.focus();
           }
     }
     
     componentDidMount() {
-      if (this.props.focused) {
+      if (!this.props.focused) {
         this.ref.current.focus()
       }
     }

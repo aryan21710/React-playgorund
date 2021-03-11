@@ -1,0 +1,3 @@
+p:first-of-type {color: red};
+p { color: blue};
+p:first-child{ color: green};

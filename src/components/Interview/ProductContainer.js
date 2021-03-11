@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { UPDATEDPRODUCTDATA } from './constants';
 import { ProductView } from './ProductView';
 import { Wrapper } from '../StyledComponents/StyledComponents';
 import './styling.css';
+import _ from 'lodash';
 
 export const ProductContainer = () => {
 	const [productData, setProductData] = useState(UPDATEDPRODUCTDATA);
@@ -15,18 +16,24 @@ export const ProductContainer = () => {
 	});
 	const [search, setSearch] = useState('');
 
-    const onChangeHandler = (e) => setSearch(e.target.value.trim());
-    
+	const onChangeHandler = (e) => setSearch(e.target.value.trim());
 
-    const filterDataBySearchedText=()=>{
-        const regexPattern = new RegExp(search,"g");
-		search.length > 0
-			? setProductData(productData.filter((data) => data.productName.match(regexPattern)))
-			: setProductData(UPDATEDPRODUCTDATA);
-    }
+	const filterDataBySearchedText = () => {
+		console.log(`filteredProductData`);
+		if (search.length > 0) {
+			const regexPattern = new RegExp(search, 'g');
+			const filteredProductData = productData.filter((data) => data.productName.match(regexPattern));
+			console.log(`filteredProductData ${JSON.stringify(filteredProductData, null, 4)}`);
+			filteredProductData.length === 0 ? setProductData(UPDATEDPRODUCTDATA) : setProductData(filteredProductData);
+		} else {
+			setProductData(UPDATEDPRODUCTDATA);
+		}
+	};
+
+	const debouncedSearch = useCallback(_.debounce(filterDataBySearchedText, 1000));
 
 	useEffect(() => {
-		filterDataBySearchedText()
+		debouncedSearch();
 	}, [search]);
 
 	const updateProductPrice = (newPrice, index) => {
@@ -83,6 +90,17 @@ export const ProductContainer = () => {
 		updateProductQuantity(newQuantity, index);
 	};
 
+	const onDeleteHandler = (e) => {
+		const index = parseInt(e.target.dataset.index);
+		let totalAmount = 0;
+		const filteredProductData = productData.filter((data, idx) => idx !== index);
+		filteredProductData.forEach((data) => {
+			totalAmount += data.price * data.quantity;
+		});
+		setTotalAmount(totalAmount);
+		setProductData([...filteredProductData]);
+	};
+
 	return (
 		<Wrapper>
 			<ProductView
@@ -93,8 +111,8 @@ export const ProductContainer = () => {
 				totalAmount={totalAmount}
 				onChangeHandler={onChangeHandler}
 				search={search}
+				onDeleteHandler={onDeleteHandler}
 			/>
 		</Wrapper>
 	);
 };
-

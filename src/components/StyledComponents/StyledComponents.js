@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
     align-items: center;
 	opacity: 1;
     z-index: 2;
-    background: grey;
+    background: black;
 	flex-direction: ${(props) => props.flexDirection || 'row'};
 	@media (max-width: 768px) {
 		flex-direction: column;

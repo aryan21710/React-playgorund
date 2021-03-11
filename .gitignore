@@ -30,3 +30,8 @@ yarn-error.log*
 node_modules/
 node_modules
 package-lock.json
+out/
+linecount.json
+linecount.txt
+*.pdf
+

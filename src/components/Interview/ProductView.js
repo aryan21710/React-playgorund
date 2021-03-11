@@ -7,12 +7,13 @@ export const ProductView = ({
 	onChangePriceHandler,
 	totalAmount,
 	search,
-	onChangeHandler,
+    onChangeHandler,
+    onDeleteHandler
 }) => {
 	return (
 		<InnerWrapper flexDirection="column">
 			<Heading>GROCERY MINI APP</Heading>
-			<InnerWrapper flex="0" height="10vh" flexDirection="row" width="70vw">
+			<InnerWrapper flex="0" height="10vh" flexDirection="row">
 				<input className="search" value={search} onChange={onChangeHandler} placeholder="SEARCH" />
 			</InnerWrapper>
 			<table>
@@ -21,7 +22,8 @@ export const ProductView = ({
 						<th> Product Name </th>
 						<th> Quantity </th>
 						<th> Product Price </th>
-						<th> Amount </th>
+                        <th> Amount </th>
+                        <th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,14 +49,15 @@ export const ProductView = ({
 										onChange={onChangePriceHandler}
 									/>
 								</td>
-								<td>{data.amount}</td>
+                                <td>{data.amount}</td>
+                                <td><button data-index={idx} onClick={onDeleteHandler}>DELETE</button></td>
 							</tr>
 						);
 					})}
 
-                    {productData.length===4 && <tr>
-						<td colSpan="3">{'Total Amount'}</td>
-						<td>{totalAmount}</td>
+                    {productData.length > 0 && <tr>
+						<td className="totalamount" colSpan="3">{'Total Amount'}</td>
+						<td className="totalamount">{totalAmount}</td>
 					</tr>}
 					
 				</tbody>
