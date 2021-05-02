@@ -3,7 +3,9 @@ import { UPDATEDPRODUCTDATA } from './constants';
 import { ProductView } from './ProductView';
 import { Wrapper } from '../StyledComponents/StyledComponents';
 import './styling.css';
-import _ from 'lodash';
+import lodash from 'lodash';
+
+const _ = lodash;
 
 export const ProductContainer = () => {
 	const [productData, setProductData] = useState(UPDATEDPRODUCTDATA);

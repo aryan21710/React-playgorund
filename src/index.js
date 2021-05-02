@@ -11,10 +11,12 @@ import './index.css';
 // import Container from './components/Gk_Trial/Container';
 import {UnmountUsingUseEffect} from './components/UnmountUsingUseEffect';
 import {FormWithHooks} from './components/Interview/FormWithHooks'
+import {ProductContainer} from './components/Interview/ProductContainer'
+import AutoComplete from './components/Zalando/AutoComplete';
 
 const items = [ { text: 'Buy grocery', done: true },
   { text: 'Play guitar', done: false },
   { text: 'Romantic dinner', done: false }
 ];
-ReactDOM.render(<FormWithHooks/>
+ReactDOM.render(<AutoComplete/>
   , document.getElementById('root'));
